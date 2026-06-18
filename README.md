@@ -17,6 +17,9 @@ The project demonstrates remote communication between a server and multiple clie
 - Thread-safe client management
 - Simple console-based interface
 
+
+`mvn -pl server exec:java`
+
 ## Project Structure
 
 ```

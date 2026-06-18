@@ -1,17 +1,33 @@
 package com.chat.app;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
-public class Main {
-    public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
+import com.chat.app.service.MessageService;
+import com.chat.app.service.impl.MessageServiceImpl;
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
+import java.rmi.AlreadyBoundException;
+import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+
+public class Main {
+    private final static String SERVICE_NAME = "messageService";
+    private final static short SERVER_PORT = 8080;
+
+    public static void main(String[] args) {
+
+        startServer();
+
+    }
+
+
+    private static void startServer() {
+        try {
+            System.out.printf("Trying to start the server on port : %d\n", SERVER_PORT);
+            var registry = LocateRegistry.createRegistry(SERVER_PORT);
+            var messageServer = new MessageServiceImpl();
+            registry.rebind(SERVICE_NAME, messageServer);
+            System.out.println("Server Started");
+        } catch (RemoteException e) {
+            System.out.println("Error: " + e.getMessage());
+            throw new RuntimeException(e);
         }
     }
 }

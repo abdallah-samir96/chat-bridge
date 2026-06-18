@@ -1,9 +1,7 @@
 package com.chat.app;
 
-import com.chat.app.service.MessageService;
 import com.chat.app.service.impl.MessageServiceImpl;
 
-import java.rmi.AlreadyBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 

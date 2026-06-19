@@ -7,5 +7,6 @@ import java.rmi.RemoteException;
 
 /* This is the contract */
 public interface MessageService extends Remote {
-    void send(MessageDTO dto) throws RemoteException ;
+    void send(MessageDTO message) throws RemoteException ;
+    void register(ClientReceiver client) throws  RemoteException;
 }

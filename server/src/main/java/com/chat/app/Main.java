@@ -15,7 +15,6 @@ public class Main {
 
     }
 
-
     private static void startServer() {
         try {
             System.out.printf("Trying to start the server on port : %d\n", SERVER_PORT);

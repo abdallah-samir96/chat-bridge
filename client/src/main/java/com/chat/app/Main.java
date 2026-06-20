@@ -4,6 +4,7 @@ import com.chat.app.dto.ClientDTO;
 import com.chat.app.dto.MessageDTO;
 import com.chat.app.service.MessageService;
 import com.chat.app.service.impl.ClientReceiverImpl;
+import com.chat.app.utils.ConfigurationProperties;
 
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
@@ -14,8 +15,8 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) throws RemoteException, NotBoundException {
 
-        var registry = LocateRegistry.getRegistry(8080);
-        var service = (MessageService)registry.lookup("messageService");
+        var registry = LocateRegistry.getRegistry(ConfigurationProperties.SERVER_PORT);
+        var service = (MessageService)registry.lookup(ConfigurationProperties.SERVICE_NAME);
 
         var scanner = new Scanner(System.in);
         System.out.println("Username: ");

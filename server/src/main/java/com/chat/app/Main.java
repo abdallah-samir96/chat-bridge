@@ -5,14 +5,15 @@ import com.chat.app.service.impl.MessageServiceImpl;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 
+import static com.chat.app.utils.ConfigurationProperties.SERVER_PORT;
+import static com.chat.app.utils.ConfigurationProperties.SERVICE_NAME;
+
 public class Main {
-    private final static String SERVICE_NAME = "messageService";
-    private final static short SERVER_PORT = 8080;
+
 
     public static void main(String[] args) {
 
         startServer();
-
     }
 
     private static void startServer() {

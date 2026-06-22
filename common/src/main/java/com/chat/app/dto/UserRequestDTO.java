@@ -8,6 +8,7 @@ public record UserRequestDTO(
         String password,
         Gender gender,
         String mobile,
-        byte[] avatar
+        byte[] avatar,
+        String extension
 ) {
 }

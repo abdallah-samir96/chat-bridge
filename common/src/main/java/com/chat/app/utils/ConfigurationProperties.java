@@ -10,5 +10,6 @@ public enum ConfigurationProperties {
     public final static Map<String, Object> envVariables = Map.of("appName", applicationName);
     public final static String SERVICE_NAME = "messageService";
     public final static short SERVER_PORT = 8080;
+    public final static String S3_BUCKET_PATH = "s3_bucket";
 
 }

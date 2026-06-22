@@ -4,6 +4,7 @@ import com.chat.app.dto.UserRequestDTO;
 import com.chat.app.model.User;
 import com.chat.app.repository.UserRepository;
 import com.chat.app.repository.config.DataSourceConfig;
+import com.chat.app.utils.ConfigurationProperties;
 import com.chat.app.utils.converter.UserMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,6 +25,7 @@ public class UserService {
         // save avatar
         // handle password hashing
         // save into the DB
+        var avatarPath = FileManager.upload(ConfigurationProperties.S3_BUCKET_PATH, userDTO.avatar(), userDTO.extension());
         var user = userMapper.toEntity(userDTO);
         var userAdded = userRepository.add(user);
         logger.info("User Added: {}", userAdded);

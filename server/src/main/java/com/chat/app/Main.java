@@ -1,10 +1,13 @@
 package com.chat.app;
 
 import com.chat.app.repository.config.DataSourceConfig;
+import com.chat.app.service.FileManager;
 import com.chat.app.service.impl.MessageServiceImpl;
+import com.chat.app.utils.ConfigurationProperties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.IOException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 

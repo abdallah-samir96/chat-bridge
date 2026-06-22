@@ -9,11 +9,31 @@ import com.chat.app.utils.ConfigurationProperties;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.Scanner;
 
 public class Main {
+    private static void connectDB() {
+        try {
+            var dbConnection = DriverManager.getConnection("jdbc:mysql://localhost:3306/chatting_bridge", "root", "root");
+            var statement = dbConnection.prepareStatement("insert into hello(name, title) values(?,?)");
+            statement.setString(1, "Hello Name");
+            statement.setString(2, "This is the title");
+            // false mean there is no resultSet
+            var result = statement.execute();
+            System.out.println(result);
+            dbConnection.close();
+        } catch (SQLException e) {
+
+            System.out.println("Could not connect" + e.getMessage());
+            throw new RuntimeException(e);
+        }
+
+    }
     public static void main(String[] args) throws RemoteException, NotBoundException {
+
 
         var registry = LocateRegistry.getRegistry(ConfigurationProperties.SERVER_PORT);
         var service = (MessageService)registry.lookup(ConfigurationProperties.SERVICE_NAME);

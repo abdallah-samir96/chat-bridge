@@ -39,4 +39,13 @@ public class UserRepository {
         return true;
 
     }
+
+    public User get(String email) {
+
+        return new User();
+    }
+    public boolean delete(String email) {
+        // delete directly and see
+        return true;
+    }
 }

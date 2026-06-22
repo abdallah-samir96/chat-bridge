@@ -19,13 +19,12 @@ public class UserRepository {
     }
 
     public boolean add(User user) {
-        logger.info("Adding user into datastore!");
+        logger.info("Adding user into datastore");
         var sqlQuery = "insert into user(name, email, password, gender, mobile, avatar, created_at) values(?,?,?,?,?,?,?)";
         try (
                 var connection = dataSource.getConnection();
                 var statement = connection.prepareStatement(sqlQuery);
         ) {
-
             statement.setString(1, user.getName() );
             statement.setString(2, user.getEmail());
             statement.setString(3, user.getPassword());

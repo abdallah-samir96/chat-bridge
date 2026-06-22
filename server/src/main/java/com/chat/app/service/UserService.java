@@ -1,10 +1,12 @@
 package com.chat.app.service;
 
+import com.chat.app.dto.LoginDTO;
 import com.chat.app.dto.UserRequestDTO;
 import com.chat.app.model.User;
 import com.chat.app.repository.UserRepository;
 import com.chat.app.repository.config.DataSourceConfig;
 import com.chat.app.utils.ConfigurationProperties;
+import com.chat.app.utils.HashingUtils;
 import com.chat.app.utils.converter.UserMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,16 +22,20 @@ public class UserService {
         this.userRepository = new UserRepository(DataSourceConfig.getDatasource());
         this.userMapper = new UserMapper();
     }
-    public boolean create(UserRequestDTO userDTO) {
+
+    /**
+     * There are background Job to handle files uploaded without linking with users
+     * **/
+    public LoginDTO create(UserRequestDTO userDTO) {
         logger.info("Create user with details: {}", userDTO);
-        // save avatar
-        // handle password hashing
-        // save into the DB
         var avatarPath = FileManager.upload(ConfigurationProperties.S3_BUCKET_PATH, userDTO.avatar(), userDTO.extension());
         var user = userMapper.toEntity(userDTO);
+        user.setAvatar(avatarPath);
+        user.setPassword(HashingUtils.generateHash(user.getPassword()));
         var userAdded = userRepository.add(user);
+        String accessToken = TokenManager.generateAndStore(user.getEmail());
         logger.info("User Added: {}", userAdded);
-        return userAdded;
+        return new LoginDTO(user.getName(), user.getEmail(), accessToken);
     }
 
     public boolean delete(String email) {

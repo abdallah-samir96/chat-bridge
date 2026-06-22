@@ -191,11 +191,13 @@ This project demonstrates:
 - Distributed Systems fundamentals
 - Maven Multi-Module Projects
 - Remote Interfaces
-- Callback Mechanism
+- Callback Mechanis
 - Client-Server Architecture
 - Java Concurrency
 - Object-Oriented Design
 
 ## License
 
-This project is created for learning and educational purposes.
+This project is licensed under the MIT License.
+
+You are free to use, modify, distribute, and sublicense this software, provided that the original copyright notice and license notice are included.

@@ -2,7 +2,6 @@ package com.chat.app;
 
 import com.chat.app.repository.config.DataSourceConfig;
 import com.chat.app.service.impl.MessageServiceImpl;
-import com.chat.app.utils.InputValidator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -18,7 +17,6 @@ public class Main {
     public static void main(String[] args)  {
         Runtime.getRuntime().addShutdownHook(new Thread(DataSourceConfig::shutdown));
         startServer();
-
     }
 
     private static void startServer()  {

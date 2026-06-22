@@ -16,7 +16,7 @@ public class TokenManager {
      * @return String
      * @since 2026-06-22
      * */
-    public static String generate(String email) {
+    public static String generateAndStore(String email) {
         var token = UUID.randomUUID().toString() + '-'+ email;
         tokenMap.put(token, email);
         return token;

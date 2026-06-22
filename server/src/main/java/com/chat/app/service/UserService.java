@@ -2,6 +2,7 @@ package com.chat.app.service;
 
 import com.chat.app.model.User;
 import com.chat.app.repository.UserRepository;
+import com.chat.app.repository.config.DataSourceConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -11,8 +12,8 @@ public class UserService {
 
     private final UserRepository userRepository;
 
-    public UserService(UserRepository repository) {
-        this.userRepository = repository;
+    public UserService() {
+        this.userRepository = new UserRepository(DataSourceConfig.getDatasource());
     }
     public boolean create(User user) {
         logger.info("Create user with details: {}", user);
@@ -34,10 +35,7 @@ public class UserService {
 
     public User get(String email) {
         logger.info("Getting User info by email: {}", email);
-        var user = userRepository.get(email);
-        if(user != null) return user;
-
-        throw new RuntimeException("user with email: " + email + " is not exists in the system");
+        return userRepository.get(email);
     }
 
 }

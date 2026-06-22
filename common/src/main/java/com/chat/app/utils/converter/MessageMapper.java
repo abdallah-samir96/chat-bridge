@@ -3,7 +3,7 @@ package com.chat.app.utils.converter;
 import com.chat.app.dto.MessageDTO;
 import com.chat.app.model.Message;
 
-public class MessageConverter implements Converter<Message, MessageDTO>{
+public class MessageMapper implements Mapper<Message, MessageDTO> {
 
     @Override
     public Message toEntity(MessageDTO dto) {

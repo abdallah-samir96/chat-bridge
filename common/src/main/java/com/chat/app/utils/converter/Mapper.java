@@ -5,7 +5,7 @@ import java.util.List;
 /*
 * Used for converting from any type to other type
 * */
-public interface Converter <E, D>{
+public interface Mapper<E, D>{
     E toEntity(D dto);
     D toDTO(E entity);
     default List<E> toEntity(List<D> dtos) {

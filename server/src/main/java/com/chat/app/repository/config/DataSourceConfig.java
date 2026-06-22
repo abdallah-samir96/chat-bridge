@@ -2,6 +2,8 @@ package com.chat.app.repository.config;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.sql.DataSource;
 
@@ -12,6 +14,7 @@ public class DataSourceConfig {
     private final static String username = "root";
     // this will be passed through env variable
     private final static String password = "root";
+    private static final Logger logger = LoggerFactory.getLogger(DataSourceConfig.class);
 
     static {
 
@@ -32,7 +35,10 @@ public class DataSourceConfig {
     /**
      * close the datasource and the associated pool
      * */
-    public void shutdown(){ dataSource.close();}
+    public static void shutdown() {
+        logger.info("Trying to free connections from connection pool");
+        dataSource.close();
+    }
 
 
 }

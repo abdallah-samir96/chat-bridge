@@ -14,15 +14,12 @@ import static com.chat.app.utils.ConfigurationProperties.SERVICE_NAME;
 public class Main {
 
     private static final Logger logger = LoggerFactory.getLogger(Main.class.getName());
-    public static void main(String[] args) throws InterruptedException {
-
-        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
-            logger.info("JVM shutdowns!!!");
-        }));
+    public static void main(String[] args)  {
+        Runtime.getRuntime().addShutdownHook(new Thread(DataSourceConfig::shutdown));
         startServer();
     }
 
-    private static void startServer() throws InterruptedException {
+    private static void startServer()  {
         try {
             logger.info("Trying to start the server using port :{}", SERVER_PORT);
             var registry = LocateRegistry.createRegistry(SERVER_PORT);
@@ -31,8 +28,10 @@ public class Main {
             logger.info("Server Started");
             Thread.currentThread().join();
         } catch (RemoteException e) {
-            logger.error("There is exception when trying to start the server with message: {}", e.getMessage());
+            logger.error("There is exception when trying to start the server, message: {}", e.getMessage());
             throw new RuntimeException(e);
+        } catch (InterruptedException e) {
+            logger.error("Exception when waiting other threads, message: {}", e.getMessage());
         }
     }
 }

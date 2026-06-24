@@ -12,5 +12,6 @@ public class Message {
     private LocalDateTime sentAt;
     private String messageHash;
     private List<Attachment> attachments;
+    private boolean isSeen;
 
 }

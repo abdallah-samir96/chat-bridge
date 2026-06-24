@@ -1,6 +1,7 @@
 package com.chat.app.repository;
 
 import com.chat.app.model.User;
+import com.chat.app.repository.config.DataSourceConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -14,8 +15,8 @@ public class UserRepository {
 
     private final static Logger logger = LoggerFactory.getLogger(UserRepository.class);
 
-    public UserRepository(DataSource source) {
-        this.dataSource = source;
+    public UserRepository() {
+        this.dataSource = DataSourceConfig.getDatasource();
     }
 
     public boolean add(User user) {

@@ -19,7 +19,7 @@ public class UserService {
     private final UserMapper userMapper;
 
     public UserService() {
-        this.userRepository = new UserRepository(DataSourceConfig.getDatasource());
+        this.userRepository = new UserRepository();
         this.userMapper = new UserMapper();
     }
 

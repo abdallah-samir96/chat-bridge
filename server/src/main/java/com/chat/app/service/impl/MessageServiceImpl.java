@@ -4,6 +4,7 @@ import com.chat.app.dto.MessageDTO;
 import com.chat.app.dto.UserRequestDTO;
 import com.chat.app.service.ClientReceiver;
 import com.chat.app.service.MessageService;
+import com.chat.app.service.MessageServiceDetails;
 import com.chat.app.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,7 +14,7 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-public class MessageServiceImpl extends UnicastRemoteObject implements MessageService{
+public class MessageServiceImpl extends UnicastRemoteObject implements MessageService {
     private final static Logger logger = LoggerFactory.getLogger(MessageServiceImpl.class);
     private final Map<String, ClientReceiver> clients = new ConcurrentHashMap<>();
     private final UserService userService;

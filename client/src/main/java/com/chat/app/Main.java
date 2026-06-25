@@ -4,7 +4,7 @@ import com.chat.app.dto.ClientDTO;
 import com.chat.app.dto.MessageDTO;
 import com.chat.app.dto.UserRequestDTO;
 import com.chat.app.model.Gender;
-import com.chat.app.service.MessageService;
+import com.chat.app.service.ChattingBridge;
 import com.chat.app.service.impl.ClientReceiverImpl;
 import com.chat.app.utils.ConfigurationProperties;
 
@@ -18,7 +18,7 @@ public class Main {
     public static void main(String[] args) throws RemoteException, NotBoundException, InterruptedException {
 
         var registry = LocateRegistry.getRegistry(ConfigurationProperties.SERVER_PORT);
-        var service = (MessageService)registry.lookup(ConfigurationProperties.SERVICE_NAME);
+        var service = (ChattingBridge)registry.lookup(ConfigurationProperties.SERVICE_NAME);
 
         var scanner = new Scanner(System.in);
         System.out.println("username: ");

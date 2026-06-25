@@ -3,8 +3,7 @@ package com.chat.app.service.impl;
 import com.chat.app.dto.MessageDTO;
 import com.chat.app.dto.UserRequestDTO;
 import com.chat.app.service.ClientReceiver;
-import com.chat.app.service.MessageService;
-import com.chat.app.service.MessageServiceDetails;
+import com.chat.app.service.ChattingBridge;
 import com.chat.app.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,11 +13,11 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-public class MessageServiceImpl extends UnicastRemoteObject implements MessageService {
-    private final static Logger logger = LoggerFactory.getLogger(MessageServiceImpl.class);
+public class ChattingBridgeImpl extends UnicastRemoteObject implements ChattingBridge {
+    private final static Logger logger = LoggerFactory.getLogger(ChattingBridgeImpl.class);
     private final Map<String, ClientReceiver> clients = new ConcurrentHashMap<>();
     private final UserService userService;
-    public MessageServiceImpl() throws RemoteException {
+    public ChattingBridgeImpl() throws RemoteException {
         this.userService = new UserService();
     }
 

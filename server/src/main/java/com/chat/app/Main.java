@@ -1,7 +1,7 @@
 package com.chat.app;
 
 import com.chat.app.repository.config.DataSourceConfig;
-import com.chat.app.service.impl.MessageServiceImpl;
+import com.chat.app.service.impl.ChattingBridgeImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -23,7 +23,7 @@ public class Main {
         try {
             logger.info("Trying to start the server using port :{}", SERVER_PORT);
             var registry = LocateRegistry.createRegistry(SERVER_PORT);
-            var messageServer = new MessageServiceImpl();
+            var messageServer = new ChattingBridgeImpl();
             registry.rebind(SERVICE_NAME, messageServer);
             logger.info("Server Started");
             Thread.currentThread().join();

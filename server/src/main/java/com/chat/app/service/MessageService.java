@@ -7,21 +7,27 @@ import com.chat.app.utils.converter.MessageMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class MessageServiceDetails {
+import java.util.List;
 
-    private static final Logger logger = LoggerFactory.getLogger(MessageServiceDetails.class);
+public class MessageService {
+
+    private static final Logger logger = LoggerFactory.getLogger(MessageService.class);
 
     private final MessageRepository messageRepository;
     private final MessageMapper messageMapper;
 
-    public MessageServiceDetails() {
+    public MessageService() {
         this.messageRepository = new MessageRepository();
         this.messageMapper = new MessageMapper();
     }
 
     public Message add(MessageDTO messageDTO) {
        logger.info("Adding new Message from : {} to: {}", messageDTO.from(), messageDTO.to());
-
        return null;
+    }
+    public List<Message> getAll(List<Long> pairs) {
+        logger.info("The pairs to get all messages between: " , pairs);
+        var messages = messageRepository.getByIds(pairs);
+        return messages;
     }
 }

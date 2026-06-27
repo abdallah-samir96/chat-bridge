@@ -1,15 +1,17 @@
 package com.chat.app.service;
 
-import com.chat.app.dto.LoginDTO;
+import com.chat.app.dto.LoginRequestDTO;
+import com.chat.app.dto.LoginResponseDTO;
 import com.chat.app.dto.UserRequestDTO;
 import com.chat.app.model.User;
 import com.chat.app.repository.UserRepository;
-import com.chat.app.repository.config.DataSourceConfig;
 import com.chat.app.utils.ConfigurationProperties;
 import com.chat.app.utils.HashingUtils;
 import com.chat.app.utils.converter.UserMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.rmi.RemoteException;
 
 public class UserService {
 
@@ -26,7 +28,7 @@ public class UserService {
     /**
      * There are background Job to handle files uploaded without linking with users
      * **/
-    public LoginDTO create(UserRequestDTO userDTO) {
+    public LoginResponseDTO create(UserRequestDTO userDTO) throws RemoteException {
         logger.info("Create user with details: {}", userDTO);
         var avatarPath = FileManager.upload(ConfigurationProperties.S3_BUCKET_PATH, userDTO.avatar(), userDTO.extension());
         var user = userMapper.toEntity(userDTO);
@@ -35,7 +37,16 @@ public class UserService {
         var userAdded = userRepository.add(user);
         String accessToken = TokenManager.generateAndStore(user.getEmail());
         logger.info("User Added: {}", userAdded);
-        return new LoginDTO(user.getName(), user.getEmail(), accessToken);
+        return new LoginResponseDTO(user.getName(), user.getEmail(), accessToken);
+    }
+
+    public LoginResponseDTO login(LoginRequestDTO dto) throws RemoteException {
+        logger.info("Login To the server with credentials!");
+        // Getting user, match the passwords, return access code
+        if(dto.email().contains("abdallah") && dto.password().contains("abdallah")) {
+            return new LoginResponseDTO("Abdallah", "Abdallah", "Abdallah:Abdallah");
+        }
+        return null;
     }
 
     public boolean delete(String email) {

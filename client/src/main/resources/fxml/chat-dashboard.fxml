@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.chat.app.controller.DashboardController">
+
+    <top>
+        <HBox styleClass="top-bar"
+              alignment="CENTER_LEFT"
+              spacing="20">
+
+            <Label text="Chatting Bridge(Chat With Me)"
+                   styleClass="app-title"/>
+
+            <Pane HBox.hgrow="ALWAYS"/>
+
+            <Label fx:id="loggedUserLabel"
+                   styleClass="logged-user"/>
+
+            <Button text="Logout"
+                    onAction="#logout"/>
+        </HBox>
+    </top>
+
+    <left>
+        <VBox prefWidth="280"
+              styleClass="users-pane">
+
+            <Label text="Connected Clients"
+                   styleClass="section-title"/>
+
+            <ListView fx:id="usersListView"
+                      VBox.vgrow="ALWAYS"/>
+        </VBox>
+    </left>
+
+    <center>
+
+        <VBox spacing="10"
+              styleClass="chat-pane">
+
+            <Label fx:id="selectedUserLabel"
+                   text="Select a user to start chatting"
+                   styleClass="section-title"/>
+
+            <ListView fx:id="messagesListView"
+                      VBox.vgrow="ALWAYS"/>
+
+            <HBox spacing="10">
+
+                <TextField fx:id="messageField"
+                           promptText="Type a message..."
+                           HBox.hgrow="ALWAYS"/>
+
+                <Button text="Send"
+                        onAction="#sendMessage"
+                        styleClass="send-button"/>
+
+            </HBox>
+
+        </VBox>
+
+    </center>
+
+</BorderPane>

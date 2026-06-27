@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17.0.12" fx:controller="com.chat.app.controller.LoginController">
+
+    <left>
+        <VBox alignment="CENTER" prefWidth="400" spacing="20" styleClass="left-pane">
+
+            <Label styleClass="title-white" text="Welcome Back" />
+
+            <Label styleClass="subtitle-white" text="Login to continue" />
+
+        </VBox>
+    </left>
+
+    <center>
+
+        <VBox alignment="CENTER" prefHeight="195.0" prefWidth="230.0" spacing="20" styleClass="form-pane">
+
+            <Label styleClass="title" text="Login" />
+
+            <TextField fx:id="emailField" promptText="Email" styleClass="text-field-modern" />
+
+            <PasswordField fx:id="passwordField" prefHeight="25.0" prefWidth="203.0" promptText="Password" styleClass="text-field-modern" />
+
+            <Button onAction="#login" styleClass="button-primary" text="Login" />
+
+            <Hyperlink onAction="#goToSignup" text="Create Account" />
+
+        </VBox>
+
+    </center>
+
+</BorderPane>

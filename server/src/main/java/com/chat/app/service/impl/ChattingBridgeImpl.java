@@ -1,9 +1,11 @@
 package com.chat.app.service.impl;
 
+import com.chat.app.dto.LoginRequestDTO;
+import com.chat.app.dto.LoginResponseDTO;
 import com.chat.app.dto.MessageDTO;
 import com.chat.app.dto.UserRequestDTO;
-import com.chat.app.service.ClientReceiver;
 import com.chat.app.service.ChattingBridge;
+import com.chat.app.service.ClientReceiver;
 import com.chat.app.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,6 +41,12 @@ public class ChattingBridgeImpl extends UnicastRemoteObject implements ChattingB
         }
         var loginDetails = userService.create(dto);
         client.receiveLoginDetails(loginDetails);
-        clients.put(client.getClientInfo().username(), client);
+        clients.put(dto.email(), client);
+    }
+
+    @Override
+    public LoginResponseDTO login(ClientReceiver client, LoginRequestDTO loginRequestDTO) throws RemoteException {
+        return userService.login(loginRequestDTO);
+        //client.receiveLoginDetails(loginResponseDTO);
     }
 }
